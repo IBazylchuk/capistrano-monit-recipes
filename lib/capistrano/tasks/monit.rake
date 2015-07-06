@@ -8,7 +8,7 @@ namespace :load do
     set :monit_configure_postgresql, false
     set :monit_configure_unicorn, false
     set :monit_templates_path, 'config/deploy/templates'
-    set :monitrc_path, '/etc/monit/monitrc'    
+    set :monitrc_path, '/etc/monit/monitrc'
 
     # UNICORN TEMPLATE specific settings
     set :monit_unicorn_process_name, -> { "unicorn_#{fetch(:application)}_#{fetch(:stage)}" }
@@ -40,7 +40,7 @@ namespace :monit do
   task :generate_config do
     on roles :app do
       upload! monit_template('monitrc'), tmp_path('monitrc')
-      final_path('monitrc', fetch(:monitrc_path))      
+      final_path('monitrc', fetch(:monitrc_path))
     end
   end
 
