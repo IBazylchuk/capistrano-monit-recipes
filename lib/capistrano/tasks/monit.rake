@@ -38,7 +38,7 @@ namespace :monit do
 
   desc 'Generate config file for Monit'
   task :generate_config do
-    on roles :app do
+    on roles :monit do
       upload! monit_template('monitrc'), tmp_path('monitrc')
       final_path('monitrc', fetch(:monitrc_path))
     end
@@ -71,7 +71,7 @@ namespace :monit do
   %w[start stop restart syntax reload].each do |command|
     desc "Run Monit #{command} script"
     task command do
-      on roles :app do
+      on roles :monit do
         execute :sudo, "service monit #{command}"
       end
     end
